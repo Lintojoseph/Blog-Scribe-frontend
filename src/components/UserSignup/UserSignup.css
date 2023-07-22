@@ -1,0 +1,24 @@
+.section-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.form-box {
+    box-shadow: 0px 1px 4px 1px #d2c0c0;
+    min-width: 400px
+}
+.input-box-border {
+    border: 1px solid #39259f ;
+}
+.input-box-lable {
+    color: #53488d !important;
+}
+.form-btn {
+    background: #6255a4 !important;
+    color: white !important;
+    padding: 10px 45px 10px 45px !important;
+}
+/* .btn{
+    background-color: rgb(225, 140, 156);
+} */

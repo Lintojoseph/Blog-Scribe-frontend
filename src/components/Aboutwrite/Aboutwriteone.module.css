@@ -1,0 +1,58 @@
+#homepage_writeone {
+    color: #2416a8;
+    height: 600px;
+    width: 100vw;
+    background-color: rgb(68, 120, 67);
+    display: grid;
+    place-items: center;
+  }
+  
+  .serach-banner-title {
+    line-height: 64px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .serach-banner-title {
+      line-height: 42px;
+    }
+  }
+  
+  /* button {
+    background-color: black;
+    border: 1px solid;
+    border-radius: 1980px;
+    width: 130px;
+    color: antiquewhite;
+  } */
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .homepage-writeone {
+      height: auto;
+      padding: 20px;
+    }
+  
+    .grid-cols-1 {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Additional Styles for Image Alignment */
+  .grid-cols-2 {
+    align-items: center;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .grid-cols-2 {
+      align-items: flex-start;
+    }
+  }
+  
+  .h-3\/6 {
+    height: 50%;
+  }
+  

@@ -1,0 +1,40 @@
+.homepage-banner {
+    color: #4e4a66;
+    height: 550px;
+    width: 100vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(/images/Banner.png);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  @media screen and (max-width:768px) {
+    .homepage-banner {
+      height: 430px;
+    }
+  }
+  
+  .banner-serach-bar {
+    width: 310px;
+  }
+  
+  @media screen and (min-width:1208px) {
+    .banner-serach-bar {
+      width: 360px;
+    }
+  }
+  
+  .serach-banner-title {
+    line-height: 64px !important;
+  }
+  
+  @media screen and (max-width:768px) {
+    .serach-banner-title {
+      line-height: 42px !important;
+    }
+  }
+  

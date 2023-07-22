@@ -1,0 +1,38 @@
+.homepage-write {
+    color: #362888;
+    height: 600px;
+    width: 100vw;
+    background-color: rgb(241, 205, 113);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+  
+  
+  @media screen and (max-width:768px) {
+    .homepage-banner {
+      height: 430px;
+    }
+  }
+  
+  .banner-serach-bar {
+    width: 310px;
+  }
+  
+  @media screen and (min-width:1208px) {
+    .banner-serach-bar {
+      width: 360px;
+    }
+  }
+  
+  .serach-banner-title {
+    line-height: 64px !important;
+  }
+  
+  @media screen and (max-width:768px) {
+    .serach-banner-title {
+      line-height: 42px !important;
+    }
+  }
+  
