@@ -3,7 +3,7 @@ import axios from 'axios'
 const axiosInstance=(tokenName:string)=>{
     const Instance = axios.create({
         baseURL:  'http://localhost:5000',
-        timeout: 2000,
+        timeout:5000,
         headers: { 'Content-Type': 'application/json' }
       });
       Instance.interceptors.request.use((request) => {
@@ -13,10 +13,16 @@ const axiosInstance=(tokenName:string)=>{
     })
 
     // instance response interceptor 
-    Instance.interceptors.response.use(response => response,
-        error => Promise.reject(error.response.data)
-    )
-
-    return Instance;
+    Instance.interceptors.response.use(
+        (response) => response,
+        (error) => {
+          if (error.response) {
+            return Promise.reject(error.response.data);
+          }
+          return Promise.reject(error.message || 'An error occurred.');
+        }
+      );
+    
+      return Instance;
 }
 export default axiosInstance;

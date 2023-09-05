@@ -44,7 +44,7 @@ function HomeNavbar() {
             </div>
             <input
               type="text"
-              className="block w-64 border border-gray-300 rounded-md py-2 pl-10 pr-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="block w-54 border border-gray-300 rounded-md py-2 pl-10 pr-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               placeholder="Search..."
             />
             <button
@@ -100,7 +100,7 @@ function HomeNavbar() {
                   aria-labelledby="user-menu-button"
                   z-0
                 >
-                  <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" z-0 id="user-menu-item-0">
+                  <a href="/profile" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" z-0 id="user-menu-item-0">
                     Your Profile
                   </a>
                   <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" z-0 id="user-menu-item-1">

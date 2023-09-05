@@ -54,6 +54,9 @@ function Write() {
           'application/msword',
           'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
           'image/webp', // Add support for .webp files
+          'image/jpeg',  // Add support for JPEG images
+          'image/png',   // Add support for PNG images
+          'image/gif',   // Add support for GIF images
         ],
         maxFileSize: 1024 * 1024 * 10, // 10 MB
         insertFileAsBase64URI: true,
@@ -63,21 +66,28 @@ function Write() {
     showXPathInStatusbar: false
   };
 
-  const handleCreatepost=async()=>{
-    const postData={
+  const handleCreatepost = async () => {
+    const postData = {
       title,
       category,
-      content
+      content,
+    };
+  
+    try {
+      const response = await writeBlog(postData);
+      console.log('API Response:', response);  // Add this line
+      
+      if (response && response.data && response.data.blog) {
+        console.log('Blog Data:', response.data.blog);  // Add this line
+        navigate('/article', { state: { blog: response.data.blog } });
+      } else {
+        console.error('Invalid API response:', response);
+      }
+    } catch (error) {
+      console.error('Error creating post:', error);
     }
-    console.log(content,"+++++++++++++++");
-    
-    try{
-      const response=await writeBlog(postData)
-      navigate('/articles',{ state: { blog: response.data.blog } })
-    }catch(error){
-      console.error('error created',error)
-    }
-  }
+  };
+  
 
   return (
     <>

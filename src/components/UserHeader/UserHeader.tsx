@@ -54,7 +54,7 @@ function UserHeader() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                         </svg>
                     </li>
-                    <li><a className="text-sm text-black-400 hover:font-bold focus:text-violet-600 hover:text-violet-600" href="#">Sign In</a></li>
+                    <li><a className="text-sm text-black-400 hover:font-bold focus:text-violet-600 hover:text-violet-600" href="#">Get Premium</a></li>
 
                 </ul>
 

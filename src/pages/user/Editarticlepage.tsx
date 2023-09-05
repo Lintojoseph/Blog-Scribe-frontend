@@ -1,14 +1,16 @@
 import React  from "react";
 import HomeNavbar from "../../components/HomeNavbar/HomeNavbar";
-import MainArticle from '../../components/MainArticle/MainArticle'
+import Edit from "../../components/Editarticle/Editarticle";
 
-function Displaypage(){
+function Editarticlepage(){
     return(
+        <>
         <React.Fragment>
             <HomeNavbar />
-            <MainArticle />
+            <Edit />
+
         </React.Fragment>
+        </>
     )
 }
-
-export default Displaypage
+export default Editarticlepage

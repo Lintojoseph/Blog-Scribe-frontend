@@ -8,6 +8,8 @@ import Homepage from '../pages/user/Homepage';
 import Writepage from '../pages/user/Writepage';
 import OtpPage from '../pages/user/OtpPage';
 import Displaypage from '../pages/user/Displaypage';
+import Profilepage from '../pages/user/Profile';
+import Editarticlepage from '../pages/user/Editarticlepage';
 
 
 
@@ -21,7 +23,9 @@ function UserRouter(){
         <Route element={<Homepage />} path='/home' />
         <Route element={<Writepage />} path='/write' />
         <Route element={<OtpPage />} path='/otp' />
-        <Route element={<Displaypage />} path='/articles' />
+        <Route element={<Displaypage />} path='/article/:id' />
+        <Route element={<Profilepage />} path='/profile' />
+        <Route element={<Editarticlepage />} path='/write/:articleId' />
        </Routes>
     )
 }
