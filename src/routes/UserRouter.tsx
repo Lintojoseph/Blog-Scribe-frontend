@@ -10,6 +10,7 @@ import OtpPage from '../pages/user/OtpPage';
 import Displaypage from '../pages/user/Displaypage';
 import Profilepage from '../pages/user/Profile';
 import Editarticlepage from '../pages/user/Editarticlepage';
+import Premiumpage from '../pages/user/Premiumpage';
 
 
 
@@ -26,6 +27,7 @@ function UserRouter(){
         <Route element={<Displaypage />} path='/article/:id' />
         <Route element={<Profilepage />} path='/profile' />
         <Route element={<Editarticlepage />} path='/write/:articleId' />
+        <Route element={<Premiumpage />} path='/premium' />
        </Routes>
     )
 }

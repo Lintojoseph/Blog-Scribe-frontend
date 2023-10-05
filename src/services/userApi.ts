@@ -74,3 +74,10 @@ export const Editarticle=(articleId:any)=>{
 export const updateArticle=(data:any)=>{
   return axiosInstance('JwtToken').put('/update-article',data,{ headers: { "Content-Type": "multipart/form-data" } })
 }
+
+export const DeleteArticle=(articleId:any)=>{
+  return axiosInstance('JwtToken').put(`/delete-article/${articleId}`)
+}
+export const authUser = () => {
+  return axiosInstance("JwtToken").get('/user-authenticate')
+}

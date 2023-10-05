@@ -1,40 +1,43 @@
-import { createSlice,PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-
-
-interface userState{
-    name:string
-    id:string
-    email:string
-    image:string
-    token:string
+interface UserState {
+  name: string;
+  id: string;
+  email: string;
+  image: string;
+  token: string;
 }
 
-const initialState:userState={
-    name:'',
-    id:'',
-    email:'',
-    image:'',
-    token:''
-}
+const initialState: UserState = {
+  name: "",
+  id: "",
+  email: "",
+  image: "",
+  token: "",
+};
 
-const userSlice=createSlice({
-    name:'user',
-    initialState,
-    reducers:{
-        setUserDetails:(state,action:PayloadAction<userState>)=>{
+const userSlice = createSlice({
+  name: "user",
+  initialState,
+  reducers: {
+    setUserDetails: (state, action: PayloadAction<UserState>) => {
+      const { name, id, email, image, token } = action.payload;
+      state.name = name;
+      state.id = id;
+      state.email = email;
+      state.image = image;
+      state.token = token;
+    },
+    setSignoutState: (state) => {
+      state.name = "";
+      state.id = "";
+      state.email = "";
+      state.image = "";
+      state.token = "";
+    },
+  },
+});
 
-            const{name,id,email,image,token}=action.payload;
-            state.name=name
-            state.id=id
-            state.email=email
-            state.image=image
-            state.token=token
+export const { setUserDetails, setSignoutState } = userSlice.actions;
 
-        }
-    }
-})
-
-export const {setUserDetails}=userSlice.actions
-
-export default userSlice.reducer
+export default userSlice.reducer;

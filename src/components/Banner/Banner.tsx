@@ -18,12 +18,12 @@ function Banner(){
                 <div className='mb-10 tracking-wide'>
                     <p className='text-xs sm:text-base sm:leading-5 md:leading-6'>Discover stories, thinking, and expertise from writers on any topic.</p>
                 </div>
-                <div onClick={() => { navigate('/courses') }} className='mb-10'>
+                {/* <div onClick={() => { navigate('/courses') }} className='mb-10'>
 
                     <button style={{backgroundColor:'black',border:'1px solid',borderRadius:'1980px',width:'130px',color:'antiquewhite'}}>
                         Start Reading
                     </button>
-                </div>
+                </div> */}
             </div>
             {/* <div className='col-span-1 flex justify-center items-center'>
                 <div className="max-w-md mx-auto hidden lg:inline-block">

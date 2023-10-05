@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { userProfile } from '../../services/userApi';
+import { DeleteArticle, userProfile } from '../../services/userApi';
 import { Link } from 'react-router-dom';
 
 interface Blog {
@@ -30,6 +30,21 @@ function Profile(){
     }
     fetchUserprofile();
   },[])
+
+  const handleDelete=async(articleId:string)=>{
+    try{
+      await DeleteArticle(articleId)
+      setUserprofiledata((prevData)=>{
+        if (!prevData) return null; // Handle null case
+        return {
+          ...prevData,
+          blogs: prevData.blogs.filter((blog) => blog._id !== articleId),
+        };
+      })
+    }catch(error){
+      console.log('errror',error)
+    }
+  }
     return(
         <>
         {userprofiledata &&(
@@ -58,7 +73,9 @@ function Profile(){
                 <Link to={`/write/${blog._id}`}>
                 <button className="text-blue-500 mr-2 hover:underline">Edit</button>
                 </Link>
-                <button className="text-red-500 hover:underline">Delete</button>
+                
+                <button className="text-red-500 hover:underline" onClick={()=>handleDelete(blog._id)}>Delete</button>
+                
               </div>
             </li>
            ))}

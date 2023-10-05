@@ -3,7 +3,7 @@ import axios from 'axios'
 const axiosInstance=(tokenName:string)=>{
     const Instance = axios.create({
         baseURL:  'http://localhost:5000',
-        timeout:5000,
+        timeout:12000,
         headers: { 'Content-Type': 'application/json' }
       });
       Instance.interceptors.request.use((request) => {

@@ -28,7 +28,7 @@ function UserHeader() {
                             <p className="text-sm text-black-400 hover:font-bold focus:text-violet-600 hover:text-violet-600" >Our story</p>
                         </Link>
                     </li>
-                    <li className="text-gray-300">
+                    {/* <li className="text-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                         </svg>
@@ -37,7 +37,7 @@ function UserHeader() {
                         <Link to={'/courses'}>
                             <p className="text-sm text-black-400 hover:font-bold focus:text-violet-600 hover:text-violet-600" >Membership</p>
                         </Link>
-                    </li>
+                    </li> */}
                     <li className="text-gray-300">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" className="w-4 h-4 current-fill" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
@@ -54,7 +54,7 @@ function UserHeader() {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                         </svg>
                     </li>
-                    <li><a className="text-sm text-black-400 hover:font-bold focus:text-violet-600 hover:text-violet-600" href="#">Get Premium</a></li>
+                    <li><a className="text-sm text-black-400 hover:font-bold focus:text-violet-600 hover:text-violet-600" href="/premium">Get Premium</a></li>
 
                 </ul>
 
@@ -91,12 +91,12 @@ function UserHeader() {
                                 </Link>
                             </li>
                             <li className="mb-1">
-                                <Link to={'/courses'}>
-                                    <a className="block p-4 text-sm  text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" >Membership</a>
+                                <Link to={'/premium'}>
+                                    <a className="block p-4 text-sm  text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" >Get Premium</a>
                                 </Link>
                             </li>
                             <li className="mb-1">
-                                <Link to={'/my-enrollments'}>
+                                <Link to={'/aboutwrite'}>
                                     <a className="block p-4 text-sm  text-gray-400 hover:bg-blue-50 hover:text-blue-600 rounded" >Write</a>
                                 </Link>
                             </li>
