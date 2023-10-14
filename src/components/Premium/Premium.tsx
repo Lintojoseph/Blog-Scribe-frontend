@@ -2,64 +2,67 @@ import './Premium.css';
 import ButtonLoading from '../Shimmer/ButtonLoading/ButtonLoading';
 import { useRef, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+const MONTHLY_PRICEID=import.meta.env.MONTHLY_PRICEID
+const ANNUAL_PRICE_ID=import.meta.env.ANNUAL_PRICE_ID
+import { SiAdguard } from "react-icons/si";
 
 function Premium() {
   const [annualLoading, setAnnualLoading] = useState(false);
   const [monthlyLoading, setMonthlyLoading] = useState(false);
-  // const isLoggedIn = /* Your logic to check if the user is logged in */;
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const navigate=useNavigate()
 
-  const handlePayment = () => {
-    // Handle payment logic here
-  };
+  // const handlePayment = () => {
+  //   // Handle payment logic here
+  // };
 
-  const handleSelectPlan = (planId) => {
-    // Handle plan selection logic here
-  };
+  // const handleSelectPlan = () => {
+  //   // Handle plan selection logic here
+  // };
 
   return (
     <div className="plan_container">
       <div className="plan_logo">
-        <img onClick={() => navigate()} src="{fullLogo}" alt="Logo" />
+        <img  src="{fullLogo}" alt="Logo" />
       </div>
       <div className="plan_heading">
         <span>Get unlimited access to Everything on BlogScribe</span>
       </div>
       <div className="plan_description">
         <span>
-          <img src="{tickIcon}" /> Plans starting at less than Rs.20/week.{' '}
+          <SiAdguard /> Plans starting at less than Rs.20/week.{' '}
         </span>
         <span>
-          <img src="{tickIcon}" /> Premium Badge.{' '}
+          <SiAdguard /> Premium Badge.{' '}
         </span>
         <span>
-          <img src="{tickIcon}" /> Cancel anytime.{' '}
+          <SiAdguard /> Cancel anytime.{' '}
         </span>
         <span>
-          <img src="{tickIcon}" /> No ads{' '}
+          <SiAdguard /> No ads{' '}
         </span>
         <span>
-          <img src="{tickIcon}" /> Support quality writing{' '}
+          <SiAdguard /> Support quality writing{' '}
         </span>
         <span>
-          <img src="{tickIcon}" /> Monetize your own Articles
+          <SiAdguard /> Monetize your own Articles
         </span>
       </div>
 
-      <div className="plan_plans">
+      {/* <div className="plan_plans">
         {isLoggedIn ? (
           <>
             <div className="plan_monthly">
               <div className="plan_m_title">Monthly</div>
               <div className="plan_m_price">Rs. 50/month</div>
-              <button onClick={() => handleSelectPlan(VITE_MONTHLY_PRICE_ID)}>
+              <button onClick={() => handleSelectPlan(MONTHLY_PRICEID)}>
                 {monthlyLoading ? <ButtonLoading /> : 'Select'}
               </button>
             </div>
             <div className="plan_monthly">
               <div className="plan_m_title">Annual</div>
               <div className="plan_m_price">Rs. 500/year</div>
-              <button onClick={() => handleSelectPlan(VITE_ANNUAL_PRICE_ID)}>
+              <button onClick={() => handleSelectPlan(ANNUAL_PRICE_ID)}>
                 {annualLoading ? <ButtonLoading /> : 'Select'}
               </button>
             </div>
@@ -68,9 +71,9 @@ function Premium() {
             </div>
           </>
         ) : (
-          <button onClick={() => navigate('/login')}>Login to Subscribe</button>
+          <button className='text-red-600' onClick={() => navigate('/login')}>Login to Subscribe</button>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

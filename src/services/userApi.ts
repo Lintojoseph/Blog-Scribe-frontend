@@ -81,3 +81,11 @@ export const DeleteArticle=(articleId:any)=>{
 export const authUser = () => {
   return axiosInstance("JwtToken").get('/user-authenticate')
 }
+
+export const subscription=(data:any)=>{
+  return axiosInstance('JwtToken').post('/create-subscription',data)
+}
+
+export const verifypayment=(data:any)=>{
+  return axiosInstance('JwtToken').post('/verifypayment',data)
+}
