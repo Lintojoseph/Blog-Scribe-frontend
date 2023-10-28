@@ -12,6 +12,8 @@ import Profilepage from '../pages/user/Profile';
 import Editarticlepage from '../pages/user/Editarticlepage';
 import Premiumpage from '../pages/user/Premiumpage';
 import PremiumHomepage from '../pages/user/PremiumHomepage';
+import PaymentSuccesspage from '../pages/user/PaymentsucessPage';
+import Sucesspage from '../pages/user/Sucesspage';
 
 
 
@@ -30,6 +32,8 @@ function UserRouter(){
         <Route element={<Editarticlepage />} path='/write/:articleId' />
         <Route element={<Premiumpage />} path='/premium' />
         <Route element={<PremiumHomepage />} path='/create-subscription' />
+        <Route element={<PaymentSuccesspage />} path='/paymentSucess' />
+        <Route element={<Sucesspage />} path='/sucess' />
        </Routes>
     )
 }

@@ -25,6 +25,12 @@ function Premiumhome() {
         setSelectedPlan(planId);
         setLoadingFunc(false); // Assuming you want to disable loading for the selected plan
     };
+    const handleClose = () => {
+        
+        console.log('Razorpay modal closed');
+        navigate('/create-subscription')
+      };
+
     const handlePayment = async () => { 
 
         console.log('selectedPlan:', selectedPlan);
@@ -38,6 +44,7 @@ function Premiumhome() {
         setLoading(true);
         const response = await subscription({
             plan: selectedPlan,
+           
         });
 
         console.log('Response:', response);
@@ -48,46 +55,43 @@ function Premiumhome() {
         } else {
             console.log('Order ID is undefined or not present in the response.');
         }
+        const amount = response.data?.data?.amount;
+        console.log(amount,'ammm')
+        if (amount !== undefined) {
+            console.log('Amount:', amount);
+        } else {
+            console.log('Amount is undefined or not present in the response.');
+        }
 
             // Now, you can initiate the Razorpay payment
             const options = {
                 key: 'rzp_test_YiKG6J90MkCSY2',
-                amount: response.data.amount >= 100 ? response.data.amount : 100,
+                amount: amount >= 100 ? amount : 100,
                 currency: 'INR',
                 name: 'BlogScribe',
                 description: 'Subscription Payment',
-                order_id: orderId,
-                handler: (response:any) => {
-                    console.log('Razorpay Handler Response:', response);
-            
-                    const { razorpay_payment_id, razorpay_order_id, razorpay_signature, plan, amount, user } = response;
-                    console.log('Razorpay Payment ID:', razorpay_payment_id);
-                    console.log('Razorpay Order ID:', razorpay_order_id);
-                    console.log('Razorpay Signature:', razorpay_signature);
-                    console.log('Plan:', plan);
-                    console.log('Amount:', amount);
-                    console.log('User:', user);
-            
-                    // Verify payment
-                    verifypayment({
-                        razorpay_order_id,
-                        razorpay_payment_id,
-                        razorpay_signature,
-                        plan,
-                        amount: String(amount),
-                        user,
-                    }).then((verifyResponse) => {
-                        console.log('Verify Response:', verifyResponse);
-            
-                        if (verifyResponse.data.success) {
-                            navigate('/paymentSucess');
-                        } else {
-                            console.log('Payment verification failed.');
-                        }
-                    }).catch((verifyError) => {
-                        console.error('Error verifying payment:', verifyError);
-                    });
+                order_id: String(orderId),
+                handler: async (response: any) => {
+                    const data = {
+                        orderCreationId: orderId,
+                        razorpayPaymentId: response.razorpay_payment_id,
+                        razorpayOrderId: response.razorpay_order_id,
+                        razorpaySignature: response.razorpay_signature,
+                        plan: selectedPlan, // Include the selected plan
+                        amount: amount,
+                    };
+                    console.log('Razorpay Payment ID:', response.razorpay_payment_id);
+                    console.log('Razorpay Order ID:', response.razorpay_order_id);
+                    console.log('Razorpay Signature:', response.razorpay_signature);
+                    console.log(data,'daaaata')
+                    const result=await verifypayment(data)
+                    console.log(result.data)
+
+                    
                 },
+                modal: {
+                    ondismiss: handleClose, // Set the ondismiss callback
+                  },
                 prefill: {
                     name: 'Blogscribe',
                     email: 'lintojoseph2097@gmail.com',
@@ -100,6 +104,7 @@ function Premiumhome() {
             
 
             const rzp = new Razorpay(options);
+            navigate('/paymentSucess');
             console.log(rzp,'rrrr')
             rzp.open();
         } catch (error) {
@@ -132,7 +137,7 @@ function Premiumhome() {
             <div className="plan_plans">
                 <div className="plan_monthly bg-gray-400">
                     <div className="plan_m_title">Monthly</div>
-                    <div className="plan_m_price">Rs. 50/month</div>
+                    <div className="plan_m_price">Rs. 100/month</div>
                     <input type="radio" name="plan" value={String(monthlyPriceId)} onChange={() => handleSelectPlan(monthlyPriceId, setMonthlyLoading)} disabled={loading}checked={selectedPlan === monthlyPriceId} />
                 </div>
                 <div className="plan_monthly bg-gray-400">
@@ -145,7 +150,7 @@ function Premiumhome() {
 
 
                 <div className="plan_pay_button_container">
-                    <button className='ring ring-red-500 bg-red-600' onClick={handlePayment}>
+                    <button className='ring ring-red-500 bg-red-600' onClick={()=>handlePayment()}>
                         Pay Now
                     </button>
 

@@ -79,7 +79,7 @@ function Write() {
       
       if (response && response.data && response.data.blog) {
         console.log('Blog Data:', response.data.blog);  // Add this line
-        navigate('/article', { state: { blog: response.data.blog } });
+        navigate('/sucess', { state: { blog: response.data.blog } });
       } else {
         console.error('Invalid API response:', response);
       }

@@ -1,4 +1,4 @@
-import "./PaymentSuccess.css";
+import './PaymentSucess.css'
 
 import { Link, useLocation, useNavigate, } from "react-router-dom";
 

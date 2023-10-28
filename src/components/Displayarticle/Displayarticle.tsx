@@ -9,15 +9,18 @@ interface Blog {
   content: string;
   images: string[];
   selectedCategory: string | null;
+  isPremium: boolean;
 }
 
 interface DisplayProps {
   selectedCategory: string | null;
+  isPremiumUser: boolean;
 }
 
-function Display({ selectedCategory }: DisplayProps) {
+function Display({ selectedCategory, isPremiumUser }: DisplayProps) {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [expandedBlogs, setExpandedBlogs] = useState<string[]>([]);
+  const [currentUserPremiumStatus, setCurrentUserPremiumStatus] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -25,10 +28,14 @@ function Display({ selectedCategory }: DisplayProps) {
         const response = await articleBlog();
 
         if (response && response.data && response.data.blogs) {
+          console.log('Fetched Blogs:', response.data.blogs);
+          console.log('Current User Premium Status:', response.data.currentUserPremiumStatus);
           setBlogs(response.data.blogs);
+          setCurrentUserPremiumStatus(response.data.currentUserPremiumStatus);
         } else {
           console.error('Invalid response structure:', response);
         }
+
       } catch (error) {
         console.error('Error occurred:', error);
       }
@@ -46,7 +53,7 @@ function Display({ selectedCategory }: DisplayProps) {
       }
     });
   };
-
+  console.log(currentUserPremiumStatus, 'isss')
   return (
     <div className="grid grid-cols-1 gap-4">
       {blogs &&
@@ -59,6 +66,9 @@ function Display({ selectedCategory }: DisplayProps) {
             <div key={blog._id} className="border p-4 rounded-lg shadow-md">
               <div className="flex items-center justify-between mb-2">
                 <h1 className="text-lg font-semibold">{blog.title}</h1>
+                {blog.isPremium && (
+                  <span className="text-yellow-500 ml-2">Premium</span>
+                )}
               </div>
               <div className="blog-image">
                 {blog.images.map((imageUrl, index) => (
@@ -85,10 +95,22 @@ function Display({ selectedCategory }: DisplayProps) {
                   </button>
                 )}
                 {!expandedBlogs.includes(blog._id) && (
-                  <Link to={`/article/${blog._id}`} className="text-blue-500">
-                    Read more
-                  </Link>
-                )}
+  <>
+    {(currentUserPremiumStatus || blog.isPremium) ? (
+      <Link to={`/article/${blog._id}`} className="text-blue-500">
+        Read more
+      </Link>
+    ) : (
+      <Link to={`/article/${blog._id}`} className="text-blue-500">
+        Read more (Premium Content - Upgrade Now)
+      </Link>
+    )}
+  </>
+)}
+
+
+
+
               </p>
             </div>
           ))}
