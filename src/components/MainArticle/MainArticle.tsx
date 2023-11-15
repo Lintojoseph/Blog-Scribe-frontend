@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import {createlike,  userArticle } from "../../services/userApi";
 import { string } from "yup";
-
+import { useNavigate } from 'react-router-dom';
+import Comments from "../CommentSection/comments";
 
 interface ArticleData {
     id:string;
@@ -17,6 +18,12 @@ function Article() {
     const { id } = useParams<{ id: string }>();
     const [article, setArticle] = useState<ArticleData | null>(null);
     const [likes, setLikes] = useState<number>(0);
+    const navigate=useNavigate()
+    const [isCommentBoxOpen, setCommentBoxOpen] = useState(false);
+
+    const toggleCommentBox = () => {
+        setCommentBoxOpen(!isCommentBoxOpen);
+      };
 
     
     console.log('Component rendering with ID:', id);
@@ -57,31 +64,15 @@ function Article() {
     };
     
       
-      
-    
-    // useEffect(() => {
-    //     const fetchLikes = async () => {
-    //         try {
-    //             if (id) { // Check if id exists before making the API call
-    //                 const response = await getLike();
-    //                 console.log(response.data, 'fff');
-    //                 setLikes(response.data.likes);
-    //             }
-    //         } catch (error) {
-    //             console.log('error occurred', error);
-    //         }
-    //     }
-    
-    //     fetchLikes();
-    // }, [id]); // Add id to the dependency array
     
 
     console.log('Component rendering with article:', article);
 
 
     return (
+        <>
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="max-w-xl bg-white p-6 shadow-md rounded-lg">
+            <div className="max-w-xl bg-white p-6 shadow-md rounded-lg ">
                 {article !== null ? (
                     <>
                         <button className="text-blue-500 mr-2" onClick={handleLike}>
@@ -91,12 +82,14 @@ function Article() {
                             
                             {likes}likes
                         </button>
-                        <button className="text-green-500">
+                        
+                        <button className="text-green-500" onClick={toggleCommentBox}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
                             </svg>
-
+                            
                         </button>
+                        
                         <h2 className="text-2xl font-semibold mb-4">{article.title}</h2>
                         <p className="text-gray-600">{article.content}</p>
                     </>
@@ -104,7 +97,15 @@ function Article() {
                     <p className="text-gray-500">Loading...</p>
                 )}
             </div>
+            {isCommentBoxOpen && (
+            <div className="absolute top-20 right-0 w-1/4 bg-gray-200 p-6 border-l">
+                <Comments />
+            </div>
+        )}
+           
         </div>
+        
+        </>
     );
 }
 

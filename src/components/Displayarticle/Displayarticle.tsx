@@ -55,7 +55,7 @@ function Display({ selectedCategory, isPremiumUser }: DisplayProps) {
   };
   console.log(currentUserPremiumStatus, 'isss')
   return (
-    <div className="grid grid-cols-1 gap-4">
+    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       {blogs &&
         blogs
           .filter(
@@ -94,22 +94,20 @@ function Display({ selectedCategory, isPremiumUser }: DisplayProps) {
                       : ''}
                   </button>
                 )}
-                {!expandedBlogs.includes(blog._id) && (
-  <>
-    {(currentUserPremiumStatus || blog.isPremium) ? (
-      <Link to={`/article/${blog._id}`} className="text-blue-500">
-        Read more
-      </Link>
-    ) : (
-      <Link to={`/article/${blog._id}`} className="text-blue-500">
-        Read more (Premium Content - Upgrade Now)
-      </Link>
-    )}
-  </>
-)}
-
-
-
+               {!expandedBlogs.includes(blog._id) && (
+                  <>
+                    {(isPremiumUser || !blog.isPremium) ? (
+                      <Link to={`/article/${blog._id}`} className="text-blue-500">
+                        Read more
+                        {blog.isPremium && isPremiumUser && (
+                          <span> (subscribe)</span>
+                        )}
+                      </Link>
+                    ) : (
+                      <span className="text-red-500">Upgrade to Premium to read more</span>
+                    )}
+                  </>
+                )}
 
               </p>
             </div>

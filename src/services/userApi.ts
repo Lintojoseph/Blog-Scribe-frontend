@@ -89,3 +89,7 @@ export const subscription=(data:any)=>{
 export const verifypayment=(data:any)=>{
   return axiosInstance('JwtToken').post('/verifypayment',data)
 }
+
+export const addComment=(post:any)=>{
+  return axiosInstance('JwtToken').put('/comment/:id',post)
+}
