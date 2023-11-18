@@ -75,10 +75,10 @@ function Write() {
   
     try {
       const response = await writeBlog(postData);
-      console.log('API Response:', response);  // Add this line
+      console.log('API Response:', response);  
       
       if (response && response.data && response.data.blog) {
-        console.log('Blog Data:', response.data.blog);  // Add this line
+        console.log('Blog Data:', response.data.blog);  
         navigate('/sucess', { state: { blog: response.data.blog } });
       } else {
         console.error('Invalid API response:', response);

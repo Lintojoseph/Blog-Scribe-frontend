@@ -126,9 +126,7 @@ interface Comment {
   // other properties if any
 }
 
-const socket = io('/', {
-  reconnection: true
-})
+const socket = io();
 
 
 const SinglePost = () => {
@@ -141,21 +139,21 @@ const SinglePost = () => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [commentsRealTime, setCommentsRealTime] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(false);
+  const [postId, setPostId] = useState<any>();
 
 
 
-  
+
   useEffect(() => {
-    // console.log('SOCKET IO', socket);
     socket.on('new-comment', (newComment) => {
-      setCommentsRealTime(newComment);
-    })
-  }, [])
+      setCommentsRealTime((prevComments) => [...prevComments, newComment]);
+    });
+  }, []);
 
 
   // add comment
 
-  const addCommentHandler = async (postId: any) => async (e: React.FormEvent<HTMLFormElement>) => {
+  const addCommentHandler = async (postId: any,e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       // Optimistically update the state
@@ -163,13 +161,15 @@ const SinglePost = () => {
       toast.success('Comment added');
       setCreatedAt(new Date().toISOString()); // Update createdAt if needed
       const newComment: Comment = { _id: 'temp-id', text: comment, postedBy: { name: 'Your Name' } };
-      setComments((prevComments) => [...prevComments, newComment ]);
+      setComments((prevComments) => [...prevComments, newComment]);
       // Assuming 'Your Name' is the default user name
-  
+
       // Make the API call
+      console.log('Calling addComment with:', { id: postId, comment: comment });
       const response = await addComment({ id: postId, comment: comment });
       const data = response.data;
-  
+      console.log('Server response:', data);
+
       if (data.success === true) {
         // Update the state with the server response
         setCreatedAt(data.post.createdAt);
@@ -181,8 +181,8 @@ const SinglePost = () => {
       toast.error(error.message);
     }
   };
-  
-  
+
+
 
   let uiCommentUpdate: Comment[] = commentsRealTime.length > 0 ? commentsRealTime : comments;
 
@@ -218,9 +218,9 @@ const SinglePost = () => {
                 <>
                   <Box sx={{ pt: 1, pl: 3, pb: 3, bgcolor: "#fafafa" }}>
                     <h2>Add your comment here!</h2>
-                    <form onSubmit={addCommentHandler}>
+                    <form onSubmit={(e) => addCommentHandler(postId, e)}>
                       <TextareaAutosize
-                        onChange={(e: any) => setComment(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setComment(e.target.value)}
                         value={comment}
                         aria-label="minimum height"
                         minRows={3}
@@ -228,9 +228,9 @@ const SinglePost = () => {
                         style={{ width: 500, padding: "5px" }}
                       />
                       <Box sx={{ pt: 1 }}>
-                      <Button type="submit" variant="contained" disabled={loading}>
-  {loading ? 'Adding Comment...' : 'Comment'}
-</Button>
+                        <Button type="submit" variant="contained" disabled={loading}>
+                          {loading ? 'Adding Comment...' : 'Comment'}
+                        </Button>
                       </Box>
                     </form>
                   </Box>

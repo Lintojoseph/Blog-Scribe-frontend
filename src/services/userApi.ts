@@ -90,6 +90,6 @@ export const verifypayment=(data:any)=>{
   return axiosInstance('JwtToken').post('/verifypayment',data)
 }
 
-export const addComment=(post:any)=>{
-  return axiosInstance('JwtToken').put('/comment/:id',post)
+export const addComment=(postData: any)=>{
+  return axiosInstance('JwtToken').put(`/comment/${postData.id}`,postData)
 }
