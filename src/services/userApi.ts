@@ -63,8 +63,8 @@ export const createlike=(id:string)=>{
   return axiosInstance('JwtToken').put(`/like/${id}`)
 }
 
-export const getLike=()=>{
-  return axiosInstance('JwtToken').get('/like/:id')
+export const removeLike=(id:string)=>{
+  return axiosInstance('JwtToken').put(`/removelike/${id}`)
 }
 
 export const Editarticle=(articleId:any)=>{

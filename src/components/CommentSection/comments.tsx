@@ -1,101 +1,4 @@
-// import { useEffect, useState } from "react"
-// import { io } from "socket.io-client"
-// import { addComment } from "../../services/userApi"
-// import { toast } from 'react-toastify';
-// import CommentList from "../commentList";
 
-
-
-// interface Comment {
-//   _id: string;
-//   postedBy: {
-//     name: string;
-//     // other properties if any
-//   };
-//   text: string;
-//   // other properties if any
-// }
-// const socket = io('/', {
-//   reconnection: true
-// })
-// function Comments() {
-//   const [comment, setcomment] = useState('')
-//   const [comments, setcomments] = useState([])
-//   const [commentsRealTime, setcommentsRealTime] = useState([])
-
-//   useEffect(() => {
-//     // console.log('socket io',socket)
-//     socket.on('new-comment', (newComment) => {
-//       setcommentsRealTime(newComment)
-//     })
-//   }, [])
-
-//   const addcomment = (id: any) => async (e: React.FormEvent<HTMLFormElement>) => {
-//     e.preventDefault()
-//     try {
-//       const { data } = await addComment(id);
-//       if (data.sucess === true) {
-//         setcomment('');
-//         toast.success('comment added')
-//         setcomments(data.post.comments);
-//         setcommentsRealTime(data.post.comments);
-//         socket.emit('comment', data.post.comments)
-
-//       }
-//     } catch {
-
-//     }
-//   }
-//   let uiCommentUpdate: Comment[] = commentsRealTime.length > 0 ? commentsRealTime : comments;
-
-//   return (
-//     <>
-//       <div className="border-t border-x-2 border-zinc-50 flex flex-col h-full box-border">
-//     {/* Comment list header */}
-//     {comments.length > 0 && (
-//         <h2 className="text-xl font-bold mt-3 mb-2">Comments:</h2>
-//     )}
-
-//     {/* Comment list */}
-//     {uiCommentUpdate.map((comment) => (
-//         <CommentList
-//             key={comment._id}
-//             name={comment.postedBy.name}
-//             text={comment.text}
-//         />
-//     ))}
-
-//     {/* Add comment form */}
-//     <div className="flex-1 pt-1 pl-3 pb-3 bg-gray-100 flex flex-col justify-between">
-//         <h2 className="text-xl font-bold">Add your comment here!</h2>
-//         <form onSubmit={(e) => addcomment(e)} className="flex-1">
-//             <textarea
-//                 onChange={(e) => setcomment(e.target.value)}
-//                 value={comment}
-//                 className="w-full h-24 p-2 border border-gray-300 rounded"
-//                 aria-label="minimum height"
-//                 rows={3}
-//                 placeholder="Add a comment..."
-//             />
-
-//             <div className="pt-1">
-//                 <button
-//                     type="submit"
-//                     className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-//                 >
-//                     Comment
-//                 </button>
-//             </div>
-//         </form>
-//     </div>
-// </div>
-
-
-//     </>
-//   )
-// }
-
-// export default Comments
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -144,18 +47,30 @@ const SinglePost = () => {
 
 
 
+  const { id: urlPostId } = useParams<{ id: string }>();
+  console.log('Params:', useParams());
+console.log('Current urlPostId:', urlPostId);
+console.log(postId,'ggggg')
+
   useEffect(() => {
     socket.on('new-comment', (newComment) => {
       setCommentsRealTime((prevComments) => [...prevComments, newComment]);
     });
-  }, []);
 
-
+    // Set the postId obtained from the URL parameters
+    setPostId(urlPostId);
+    console.log('Current urlPostId2:', urlPostId);
+  }, [urlPostId]); // Add urlPostId as a dependency
+  console.log('Current postId:', postId);
   // add comment
 
   const addCommentHandler = async (postId: any,e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      if (postId === undefined) {
+        console.error('postId is undefined');
+        return;
+      }
       // Optimistically update the state
       setComment('');
       toast.success('Comment added');
